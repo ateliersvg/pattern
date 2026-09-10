@@ -1,0 +1,72 @@
+{
+    "name": "atelier/pattern",
+    "description": "Repeatable SVG fill patterns for PHP: dots, stripes, grids, honeycomb, scales, chevron, checker",
+    "license": "MIT",
+    "type": "library",
+    "homepage": "https://ateliersvg.com/pattern/",
+    "keywords": [
+        "svg",
+        "pattern",
+        "tile",
+        "tiling",
+        "fill",
+        "texture",
+        "dots",
+        "stripes",
+        "hatch",
+        "grid",
+        "honeycomb",
+        "php-svg",
+        "atelier-svg"
+    ],
+    "support": {
+        "issues": "https://github.com/ateliersvg/pattern/issues",
+        "source": "https://github.com/ateliersvg/pattern"
+    },
+    "authors": [
+        {
+            "name": "Simon André",
+            "email": "smn.andre@gmail.com",
+            "homepage": "https://smnandre.dev"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">=8.3",
+        "atelier/svg": "^1.0"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.94",
+        "phpstan/phpstan": "^2.1",
+        "phpunit/phpunit": "^12.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Atelier\\Pattern\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Atelier\\Pattern\\Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "scripts": {
+        "coverage": [
+            "@php -r \"@unlink('.phpunit.cache/coverage.xml');\"",
+            "@php -d pcov.enabled=1 vendor/bin/phpunit --coverage-clover=.phpunit.cache/coverage.xml"
+        ],
+        "cs": "vendor/bin/php-cs-fixer fix --dry-run --diff",
+        "cs:fix": "vendor/bin/php-cs-fixer fix",
+        "gallery": "php examples/gallery.php",
+        "qa": [
+            "@cs",
+            "@sa",
+            "@test"
+        ],
+        "sa": "vendor/bin/phpstan analyse --memory-limit=-1",
+        "test": "vendor/bin/phpunit"
+    }
+}
