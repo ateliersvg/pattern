@@ -18,14 +18,16 @@ use Atelier\Pattern\Pattern;
 $dots = Pattern::dots(spacing: 14, radius: 2.2, stagger: 0.5)->withColor('#f4715c');
 ```
 
+Examples from the catalogue: staggered dots and seigaiha.
+
 <p align="center">
   <img src="docs/images/dots.svg" width="240" alt="Staggered dots repeating across a surface">
   <img src="docs/images/seigaiha.svg" width="240" alt="Overlapping arcs forming a repeating seigaiha pattern">
 </p>
 
 A pattern is an immutable value. It needs no document to exist and provides a `<pattern>`
-element plus the `url(#id)` that references it. Atelier SVG supplies the document and element
-vocabulary. Drawings generated for one viewport belong to the companion `atelier/field` package.
+element plus the `url(#id)` that references it. Add the tile to an Atelier SVG document and
+use it as a fill or stroke. For drawings generated for one viewport, see `atelier/field`.
 
 **[Style](#style) · [Catalogue](#catalogue) · [Errors](#error-handling) · [Gallery](#gallery) · [Documentation](#documentation)**
 
@@ -52,13 +54,13 @@ use Atelier\Svg\Element\Shape\RectElement;
 
 require __DIR__.'/vendor/autoload.php';
 
-$dots = Pattern::dots(spacing: 14, radius: 2.2)->withColor('#f4715c')->withOpacity(0.4);
+$dots = Pattern::dots(spacing: 14, radius: 2.2, stagger: 0.5)->withColor('#f4715c');
 
-$document = Document::create(600, 400);
+$document = Document::create(360, 200);
 (new PatternRegistry($dots))->attachTo($document);
 
 $surface = new RectElement();
-$surface->setX('0')->setY('0')->setWidth('600')->setHeight('400');
+$surface->setWidth('360')->setHeight('200');
 $surface->setAttribute('fill', $dots->fill());
 
 $document->getRootElement()?->appendChild($surface);
@@ -66,16 +68,21 @@ $document->getRootElement()?->appendChild($surface);
 echo (new CompactXmlDumper())->dump($document);
 ```
 
-The tile lands in `<defs>` under an identifier derived from its content, and `fill()` returns
-a `url(#...)` reference to that same identifier.
+The example has three steps:
+
+1. Create the tile with `Pattern::dots()`.
+2. Register it in the document with `PatternRegistry`.
+3. Fill the rectangle using `$dots->fill()`.
+
+The registry places the tile in `<defs>`. Its identifier is derived from its geometry and style.
 
 ## Style
 
-Factories take geometry. Style applies afterwards and returns a new pattern each time.
+Style methods return a new pattern, leaving the original unchanged.
 The following snippets reuse the imports and autoloader above.
 
 ```php
-Pattern::stripes(spacing: 12, thickness: 4)
+$stripes = Pattern::stripes(spacing: 12, thickness: 4)
     ->withColor('#c0392b')
     ->withOpacity(0.4)
     ->withAngle(30);
@@ -195,6 +202,8 @@ Each tile documents its accepted ranges; see [Getting started](docs/getting-star
 for validation, identifiers, and seeded output guarantees.
 
 ## Gallery
+
+From a repository checkout with dependencies installed:
 
 ```bash
 composer gallery
