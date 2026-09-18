@@ -1,9 +1,14 @@
-<h1 align="center">Atelier Pattern</h1>
+<h1 align="center">
+  <img src=".github/atelier-pattern.svg"
+       alt="Atelier Pattern">
+</h1>
 
 <p align="center">Repeatable SVG tiles for fills and strokes, in PHP.</p>
 
 <p align="center">
   <img alt="PHP Version" src="https://img.shields.io/badge/PHP-8.3%2B-f4715c?labelColor=14141c">
+  <img alt="Version" src="https://img.shields.io/packagist/v/atelier/pattern?label=Version&labelColor=14141c&color=f4715c">
+  <img alt="Tests" src="https://img.shields.io/github/actions/workflow/status/ateliersvg/pattern/CI.yml?branch=main&label=Tests&labelColor=14141c&color=f4715c">
   <img alt="PHPUnit" src="https://img.shields.io/badge/PHPUnit-12-f4715c?labelColor=14141c">
   <img alt="PHPStan" src="https://img.shields.io/badge/PHPStan-max-f4715c?labelColor=14141c">
   <a href="LICENSE"><img alt="License" src="https://img.shields.io/badge/License-MIT-f4715c?labelColor=14141c"></a>
